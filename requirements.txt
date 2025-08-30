@@ -1,0 +1,8 @@
+numpy
+pandas
+scikit-learn
+datetime
+dvc
+dvc-s3
+mlflow
+pymongo
