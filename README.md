@@ -70,7 +70,8 @@ params = {
 }
 ```
 ---
-Pipeline
+
+## Pipeline
 
 The pipeline is managed with DVC:
 
