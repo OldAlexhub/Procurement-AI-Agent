@@ -21,6 +21,39 @@ While the dataset does not contain explicit compliance rules, the model leverage
 
 ---
 
+## Data Ingestion with R
+
+I initially loaded the dataset into MongoDB using R. Keep that workflow documented here.
+
+- R script location: `R/datauploader.R`
+- Example using `mongolite`:
+
+```r
+# R/datauploader.R
+library(mongolite)
+library(readr)
+
+# Read CSV
+df <- read_csv("R/Procurement KPI Analysis Dataset.csv")
+
+# Use MONGO_URI from an .Renviron or Sys.setenv
+mongo_uri <- Sys.getenv("MONGO_URI")
+stopifnot(nchar(mongo_uri) > 0)
+
+# Write to MongoDB
+con <- mongo(
+  collection = "Procurement-AI-Agent",
+  db = "test",
+  url = mongo_uri
+)
+
+con$insert(df)
+cat("Inserted", nrow(df), "rows into test.Procurement-AI-Agent\n")
+```bash
+Rscript R/datauploader.R
+```
+```
+
 ## Data Glossary
 
 | Field          | Encoded Column        | Values                                                                 |
