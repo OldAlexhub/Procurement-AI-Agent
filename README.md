@@ -162,7 +162,7 @@ dvc repro
 
 - Tracking: DagsHub
 
-- Frameworks: scikit-learn, DVC, MLflow, FastAPI, MongoDB
+- Frameworks: scikit-learn, DVC, MLflow, and MongoDB
 
 
 ## Created by
