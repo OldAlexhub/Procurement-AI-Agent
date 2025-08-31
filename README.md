@@ -49,9 +49,11 @@ con <- mongo(
 
 con$insert(df)
 cat("Inserted", nrow(df), "rows into test.Procurement-AI-Agent\n")
+
+```
+
 ```bash
 Rscript R/datauploader.R
-```
 ```
 
 ## Data Glossary
