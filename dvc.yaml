@@ -1,0 +1,30 @@
+stages:
+  preprocess:
+    cmd: python src/preprocess.py
+    deps:
+      - src/preprocess.py
+      - params.yaml
+    outs:
+      - data/processed/data.parquet
+      - models/scaler.pkl
+
+  train:
+    cmd: python src/train.py
+    deps:
+      - src/train.py
+      - params.yaml
+      - data/processed/data.parquet
+    outs:
+      - models/model.pkl
+      - metrics/train.json
+
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+      - src/evaluate.py
+      - params.yaml
+      - models/model.pkl
+      - data/processed/data.parquet
+    outs:
+      - metrics/eval.json
+      - metrics/curves/

@@ -6,3 +6,6 @@ dvc
 dvc-s3
 mlflow
 pymongo
+python-dotenv
+joblib
+dagshub

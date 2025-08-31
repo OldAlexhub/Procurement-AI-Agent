@@ -1,0 +1,5 @@
+Order_Status,encoded_Order_Status
+Cancelled,0.0
+Delivered,1.0
+Partially Delivered,2.0
+Pending,3.0

@@ -1,0 +1,39 @@
+preprocess:
+  mongo_uri_env: "MONGO_URI"
+  db: 'test'
+  src_collection: "Procurement-AI-Agent"
+  dst_collection: "Processed-Procurement-AI-Agent"
+  output_parquet: "data/processed/data.parquet"
+  scaler_path: 'models/scaler.pkl'
+  clear_dst_first: false
+
+train:
+  mongo_uri_env: "MONGO_URI"
+  db: "test"
+  collection: "Processed-Procurement-AI-Agent"
+
+  model_out: "models/model.pkl"
+  metrics_out: "metrics/train.json"
+
+  model_type: "RandomForestClassifier"
+  model_params:
+    n_estimators: 350
+    criterion: "gini"
+    max_depth: null
+    min_samples_split: 5
+    min_samples_leaf: 2
+    max_features: "sqrt"
+    bootstrap: true
+    class_weight: "balanced"
+    random_state: 42
+    n_jobs: -1
+    verbose: 0
+
+evaluate:
+  mongo_uri_env: "MONGO_URI"
+  db: "test"
+  collection: "Processed-Procurement-AI-Agent"
+
+  model_in: "models/model.pkl"
+  metrics_out: "metrics/eval.json"
+  curves_dir: "metrics/curves"
