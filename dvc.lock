@@ -1,0 +1,75 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python src/preprocess.py
+    deps:
+    - path: params.yaml
+      hash: md5
+      md5: 5095c91eec5cee5e6a0d327c4c255289
+      size: 949
+    - path: src/preprocess.py
+      hash: md5
+      md5: 3610e453b40a8a6ac9047aef0634296f
+      size: 2524
+    outs:
+    - path: data/processed/data.parquet
+      hash: md5
+      md5: f23b803c75ff550569c9a1bbba59c8c2
+      size: 23775
+    - path: models/scaler.pkl
+      hash: md5
+      md5: 258d4c71630f0f0943140ca65e5e77e6
+      size: 484
+  train:
+    cmd: python src/train.py
+    deps:
+    - path: data/processed/data.parquet
+      hash: md5
+      md5: f23b803c75ff550569c9a1bbba59c8c2
+      size: 23775
+    - path: params.yaml
+      hash: md5
+      md5: 5095c91eec5cee5e6a0d327c4c255289
+      size: 949
+    - path: src/train.py
+      hash: md5
+      md5: 31e06d9b9d848a39132f20b7c67f8685
+      size: 5277
+    outs:
+    - path: metrics/train.json
+      hash: md5
+      md5: 47a23c16e7073a19095e16911175e13e
+      size: 1485
+    - path: models/model.pkl
+      hash: md5
+      md5: 4f141e0847a1329d8099feefa51dc04c
+      size: 3774025
+  evaluate:
+    cmd: python src/evaluate.py
+    deps:
+    - path: data/processed/data.parquet
+      hash: md5
+      md5: f23b803c75ff550569c9a1bbba59c8c2
+      size: 23775
+    - path: models/model.pkl
+      hash: md5
+      md5: 4f141e0847a1329d8099feefa51dc04c
+      size: 3774025
+    - path: params.yaml
+      hash: md5
+      md5: 5095c91eec5cee5e6a0d327c4c255289
+      size: 949
+    - path: src/evaluate.py
+      hash: md5
+      md5: 85b6b067026db814d48616881488bbb0
+      size: 5383
+    outs:
+    - path: metrics/curves/
+      hash: md5
+      md5: 78e7ad0b53362701fba6a713fa2ecc39.dir
+      size: 31228
+      nfiles: 2
+    - path: metrics/eval.json
+      hash: md5
+      md5: c9489e9cfbc590e2b383c034434ddef8
+      size: 1495
